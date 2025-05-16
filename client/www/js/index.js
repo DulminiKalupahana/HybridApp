@@ -1,7 +1,7 @@
 // Server base domain url 
-// const domainUrl = "http://localhost:3000";  // Use this for local testing
+// const domainUrl = "http://localhost:3000"; 
 
- const domainUrl = "https://giftdeliveryapp-1.onrender.com";  // Use this for render testing
+ const domainUrl = "https://hybridapp.onrender.com";  
 
 
 let debug = true;
@@ -9,7 +9,7 @@ let authenticated = false;
 
 $(document).ready(function () {
 
-	/** ---------------------- Login Handler ---------------------- **/
+	
 
 	$('#loginButton').click(function () {
 		localStorage.removeItem("inputData");
@@ -209,7 +209,7 @@ $(document).ready(function () {
         }
 
     } catch (error) {
-        console.error("❌ Error fetching orders:", error);
+        console.error("Error fetching orders:", error);
         alert("Failed to load past orders.");
     }
 }
@@ -229,8 +229,7 @@ async function deleteOrders() {
     if (!response.ok) throw new Error("Delete failed");
     const data = await response.json();
 
-    // sessionStorage.setItem("deletedCount", data.deletedCount);
-	sessionStorage.setItem("deletedOrdersCount", data.deletedCount);
+    sessionStorage.setItem("deletedOrdersCount", data.deletedCount);
 
     $.mobile.changePage("#deleteConfirmPage");
 
@@ -241,8 +240,6 @@ async function deleteOrders() {
 }
 
 
-
-	/** ---------------------- Page Events ---------------------- **/
 
 	$(document).on("pageshow", "#orderListPage", function () {
     	fetchAndDisplayOrders();
@@ -280,8 +277,7 @@ async function deleteOrders() {
 		}
 	});
 
-	/** ---------------------- Add User (Signup) Handler ---------------------- **/
-
+	
 	$(document).on("pagecreate", "#signupPage", function () {
 		$("#signupForm").on("submit", function (e) {
 			e.preventDefault();
@@ -315,7 +311,7 @@ async function deleteOrders() {
 	});
 
 	document.getElementById('doneButton').addEventListener('click', function() {
-    // Navigate to Home Page
+ 
     $.mobile.changePage('#homePage', {
         transition: 'slide',
         reverse: false

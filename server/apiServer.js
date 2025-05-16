@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 // MongoDB Atlas URI and client
-const uri = "mongodb+srv://hiviebay97:Y5M6OE5DAsUxTSux@cluster0.lbnlhye.mongodb.net/";
+const uri = "mongodb+srv://giftadmin:admin@cluster0.pvzye.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Global collections
@@ -30,7 +30,7 @@ async function connectDB() {
 		orderCollection = db.collection("orders");
 
 	} catch (error) {
-		console.error("❌ MongoDB connection error:", error);
+		console.error("MongoDB connection error:", error);
 	}
 }
 
@@ -47,10 +47,10 @@ app.get('/', (req, res) => {
 app.get('/getUserDataTest', async (req, res) => {
 	try {
 		const users = await userCollection.find({}, { projection: { _id: 0 } }).toArray();
-		console.log("✅ Retrieved users:", users);
+		console.log("Retrieved users:", users);
 		res.status(200).send(`<h1>${JSON.stringify(users)}</h1>`);
 	} catch (err) {
-		console.error("❌ Error retrieving user data:", err);
+		console.error("Error retrieving user data:", err);
 		res.status(500).json({ message: "Server error", error: err });
 	}
 });
@@ -59,10 +59,10 @@ app.get('/getUserDataTest', async (req, res) => {
 app.get('/getOrderDataTest', async (req, res) => {
 	try {
 		const orders = await orderCollection.find({}, { projection: { _id: 0 } }).toArray();
-		console.log("✅ Retrieved orders:", orders);
+		console.log("Retrieved orders:", orders);
 		res.status(200).send(`<h1>${JSON.stringify(orders)}</h1>`);
 	} catch (err) {
-		console.error("❌ Error retrieving order data:", err);
+		console.error("Error retrieving order data:", err);
 		res.status(500).json({ message: "Server error", error: err });
 	}
 });
@@ -98,7 +98,7 @@ app.delete("/api/orders/:email", async (req, res) => {
 // Login: Verify user credentials
 app.post('/verifyUserCredential', async (req, res) => {
 	const { email, password } = req.body;
-	console.log("🔐 Verifying credentials:", req.body);
+	console.log("Verifying credentials:", req.body);
 
 	try {
 		const user = await userCollection.findOne(
@@ -107,15 +107,15 @@ app.post('/verifyUserCredential', async (req, res) => {
 		);
 
 		if (user) {
-			console.log("✅ User found:", user);
+			console.log("User found:", user);
 			res.status(200).send(user);
 		} else {
-			console.log("❌ No matching user found");
+			console.log("No matching user found");
 			res.status(200).send({});
 		}
 
 	} catch (err) {
-		console.error("❌ Error during user verification:", err);
+		console.error("Error during user verification:", err);
 		res.status(500).json({ message: "Server error", error: err });
 	}
 });
@@ -138,14 +138,14 @@ app.post('/addUser', async (req, res) => {
 // Order submission: Insert order data
 app.post('/insertOrderData', async (req, res) => {
 	const orderData = req.body;
-	console.log("📦 Inserting order:", orderData);
+	console.log("Inserting order:", orderData);
 
 	try {
 		const result = await orderCollection.insertOne(orderData);
-		console.log(`✅ Order inserted with ID: ${result.insertedId}`);
+		console.log(`Order inserted with ID: ${result.insertedId}`);
 		res.status(200).send(result);
 	} catch (err) {
-		console.error("❌ Error inserting order:", err);
+		console.error("Error inserting order:", err);
 		res.status(500).json({ message: "Server error", error: err });
 	}
 });
