@@ -1,0 +1,66 @@
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select,a{margin:0;padding:0;outline:none;}
+
+body{
+  font-family: Helvetica, Tahoma, Arial; 
+}
+input::-webkit-input-placeholder{
+	color:#e1e1e1;
+	text-shadow:none;
+}
+div,ul,li,a,label,p,button{
+  margin:0;
+  padding:0;
+}
+ul, li { list-style:none;  }
+
+a,p{
+	text-shadow:none;	
+	text-decoration:none;
+	}
+  
+form div{margin-top:20px;position:relative}
+
+
+.fcolor{
+    color:#33ccff;
+  }
+
+   
+.wrap{margin:0 auto;max-width:414px;min-height:100%;overflow-x:hidden;background:#fbfbfb}
+.pb{padding-bottom:60px}
+
+
+/*Log in*/
+.login form{width:80%;margin:30px auto}
+.login form div input{width:100%;height:40px;line-height:44px;border:none;border-bottom:1px solid #33ccff;background:none;outline:none;box-shadow: none}
+.login form div.button{background:#33ccff;margin-top:20px;}
+
+
+/** Gift list*/
+.ilist li{position:relative; }
+.ilist li:nth-child(even){background-color:#f2f2f2}
+.ilist li a{display:block;height:90px;padding:10px;overflow:hidden}
+.ilist li img{height:86px;width:86px;vertical-align:top;padding:2px;background:white;box-shadow:0 0 0 1px #ddd;float:left}
+.ilist li div{width:calc(90% - 100px);height:90px;float:left;line-height:30px;margin-left:10px}
+.ilist li h3{height:30px;color:#000;font-size:16px}
+.ilist li p{height:30px;color:#666;font-size:14px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;word-break:break-all}
+.ilist li p span{color:#EC6941}
+
+
+.footer{
+	background-color:#33ccff;
+	text-align:center;
+}
+
+#doneButton {
+    background: #33ccff; 
+    margin-top: 20px; 
+    width: 50%; 
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+    padding: 10px; 
+    font-size: 16px; 
+    text-align: center; 
+    border-radius: 5px; 
+}

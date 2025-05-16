@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Security-Policy"
+		content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src * data:;">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+	<link rel="stylesheet" href="themes/myTheme.css" />
+	<link rel="stylesheet" href="./css/index.css">
+	<link rel="stylesheet" href="./js/jquery.mobile-1.4.5.css" />
+	<script src="./js/jquery-2.0.0.js"></script>
+	<script src="./js/jquery.mobile-1.4.5.js"></script>
+	<script src="./js/jquery.validate.min.js"></script>
+	<script src="./js/jqueryValidation.js"></script>
+	<script src="./js/index.js"></script>
+	<title>Gift Delivery</title>
+</head>
+
+<body>
+
+	<!-- Login Page -->
+	<div data-role="page" id="loginPage">
+		<div data-role="header" data-theme="d" data-position="fixed">
+			<h1>Welcome to Gift Delivery</h1>
+		</div>
+		<div data-role="content">
+			<div class="wrap login">
+				<div><img src="img/banner.png" width="100%;" /></div>
+				<form id="loginForm" method="get" action="">
+					<input type="email" name="email" placeholder="Enter your Email" required />
+					<input type="password" name="password" placeholder="Enter the Password" required />
+					<button type="submit" id="loginButton" class="ui-btn ui-shadow ui-corner-all ui-btn-d">Login</button>
+					<a href="#signupPage" class="ui-btn ui-shadow ui-corner-all ui-btn-d">Sign up</a>
+				</form>
+			</div>
+		</div>
+		<div data-role="footer" data-theme="d" data-position="fixed" class="footer">
+			<p>Copyright © Gift Delivery 2024</p>
+		</div>
+	</div>
+
+	<!-- Signup Page -->
+	<div data-role="page" id="signupPage">
+		<div data-role="header" data-theme="d" data-position="fixed">
+			<h1>User Registration</h1>
+		</div>
+		<div data-role="content">
+			<div class="wrap login">
+				<form id="signupForm" method="post" action="/addUser">
+					<input type="email" name="email" id="email" placeholder="Email" required />
+					<input type="password" name="password" id="password" placeholder="Password" required />
+					<input type="text" name="firstName" id="firstName" placeholder="*First Name" required />
+					<input type="text" name="lastName" id="lastName" placeholder="*Last Name" required />
+
+					<select name="state" id="state" required>
+						<option value="">Select State</option>
+						<option value="NSW">NSW</option>
+						<option value="VIC">VIC</option>
+						<option value="QLD">QLD</option>
+						<option value="WA">WA</option>
+						<option value="SA">SA</option>
+						<option value="TAS">Tasmania</option>
+						<option value="ACT">ACT</option>
+						<option value="NT">NT</option>
+					</select>
+
+					<input type="tel" name="phone" id="phone" placeholder="Phone Number" required />
+					<input type="text" name="address" id="address" placeholder="Address" required />
+					<input type="text" name="postcode" id="postcode" placeholder="Postcode" required />
+
+					<button type="submit" id="signupButton" class="ui-btn ui-shadow ui-corner-all ui-btn-d">Submit</button>
+					<button type="reset" id="clearButton" class="ui-btn ui-shadow ui-corner-all">Clear</button>
+				</form>
+			</div>
+		</div>
+		<div data-role="footer" data-theme="d" data-position="fixed" class="footer">
+			<p>Copyright © Gift Delivery 2024</p>
+		</div>
+	</div>
+
+	<!-- Home Page -->
+	<div data-role="page" id="homePage">
+		<div data-role="header" data-theme="d" data-position="fixed">
+			<a href="#loginPage" rel="external"
+				class="ui-btn ui-icon-power ui-btn-icon-notext ui-corner-all"></a>
+			<h1>Gift Delivery</h1>
+		</div>
+		<div data-role="content">
+			<div class="wrap pb">
+				<ul class="ilist" id="menuList">
+					<li>
+						<a href="#selectPage">
+							<img src="img/flower.png" />
+							<div>
+								<h3 class="fcolor">Order a gift item</h3>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#orderListPage">
+							<img src="img/order.png" />
+							<div>
+								<h3 class="fcolor">See past orders</h3>
+							</div>
+						</a>
+					</li>
+					<li>
+						<li>
+						<a href="#" id="deleteOrdersLink">
+							<img src="img/delete.png" />
+							<div><h3 class="fcolor">Delete orders</h3></div>
+						</a>
+						</li>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div data-role="footer" data-theme="d" data-position="fixed" class="footer">
+			<p>Copyright © Gift Delivery 2024</p>
+		</div>
+	</div>
+
+	<!-- Order List Page -->
+	<div data-role="page" id="orderListPage">
+		<div data-role="header" data-theme="d" data-position="fixed">
+			<a href="javascript:history.go(-1)"
+				class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all">Back</a>
+			<h1>Past Orders</h1>
+			<a href="#homePage" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">Home</a>
+		</div>
+		<div data-role="content">
+			<div class="wrap">
+				<ul id="orderList" class="ilist">
+					<!-- Order items populated dynamically -->
+				</ul>
+			</div>
+			<button id="doneButton" class="ui-btn ui-shadow ui-corner-all ui-btn-d">Done</button>
+		</div>
+
+		
+		<div data-role="footer" data-theme="d" data-position="fixed" class="footer">
+			<p>Copyright © Gift Delivery 2024</p>
+		</div>
+	</div>
+
+	<!-- Delete Confirmation Page -->
+<div data-role="page" id="deleteConfirmPage">
+    <div data-role="header" data-theme="d" data-position="fixed">
+        <h1>Orders Deleted</h1>
+    </div>
+    <div data-role="content">
+        <div class="wrap">
+            <p id="deletedCountMessage" style="text-align:center; font-size:18px;"></p>
+            <div class="button" style="text-align:center;">
+				<div data-role="content">
+    				<p id="deleteMessage"></p>   
+				</div>
+                <a href="#homePage" class="ui-btn ui-btn-inline" style="background:#33ccff; width:150px;">Done</a>
+            </div>
+        </div>
+    </div>
+    <div data-role="footer" data-theme="d" data-position="fixed" class="footer">
+        <p>Copyright © Gift Delivery 2024</p>
+    </div>
+</div>
+
+	
+    <!------------------------Select page---------------------------->
+	<div data-role="page" id="selectPage">
+		<div data-role="header" data-theme="d" data-position="fixed">
+			<a href="javascript:history.go(-1)" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all">go back</a>
+			<h1>Select a Gift</h1>
+			<a href="#homePage" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">home</a>
+		</div>
+    <!------------------------Main content---------------------------->
+		<div data-role="content" id="content">
+			<div class="wrap pb">
+				<ul class="ilist" id="itemList">
+					<li>
+						<a href="#fillOrderPage">
+							<img id="itemImage" src="img/flowers.png" />
+							<div>
+								<h3 id="itemName">Flowers</h3>
+								<p>Price:<span id="itemPrice">$16</span></p>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#fillOrderPage">
+							<img id="itemImage" src="img/gcard.png" />
+							<div>
+								<h3 id="itemName">Greeting card</h3>
+								<p>Price:<span id="itemPrice">$17</span></p>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#fillOrderPage">
+							<img id="itemImage" src="img/chocolate.png" />
+							<div>
+								<h3 id="itemName">Chocolate</h3>
+								<p>Price:<span id="itemPrice">$18</span></p>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="#fillOrderPage">
+							<img id="itemImage" src="img/phone.png" />
+							<div>
+								<h3 id="itemName">Phone</h3>
+								<p>Price:<span id="itemPrice">$510</span></p>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--footer-->
+		<div data-role="footer" data-theme="d" data-position="fixed" class="footer">
+			<p>Copyright © Gift Delivery 2024</p>
+		</div>
+	</div>
+
+    <!------------------------Fill Order page---------------------------->
+	<div data-role="page" id="fillOrderPage">
+		<div data-role="header" data-theme="d" data-position="fixed">
+			<a href="javascript:history.go(-1)" class="ui-btn ui-icon-carat-l ui-btn-icon-notext ui-corner-all">go
+				back</a>
+			<h1>Complete Order</h1>
+			<a href="#homePage" rel="external" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all">home</a>
+		</div>
+  <!------------------------Main content---------------------------->
+		<div data-role="content" id="content">
+			<div class="wrap">
+				<p class="fcolor"><b>Gift details</b></p>
+					<!--get data from local -->
+				<form id="orderForm" method="get" action="">
+					<ul class="ilist">
+							<li>
+								<img id="imageSelected" src="" />
+								<div>
+									<p><b id="itemSelected"></b></p>
+									<p>Price:<span id="priceSelected"></span></p>
+								</div>
+							</li>
+					</ul>
+					<p class="fcolor">Please select a postman</p>
+					<select name="distributor">
+						<option value="Santa Claus">Santa Claus</option>
+						<option value="Cupid">Cupid</option>
+						<option value="Spiderman">Spiderman</option>
+						<option value="Kangaroo">Kangaroo</option>
+					</select>
+					<!--Fill info-->
+					<p class="fcolor">Fill in receiver information</p>
+					<input type="text" name="firstName" placeholder="*First Name">
+					<input type="text" name="lastName" placeholder="*Last Name">
+					<p class="fcolor">Please select state </p>
+					<select name="state" >
+						<option value="ACT">ACT</option>
+						<option value="VIC">VIC</option>
+						<option value="NSW">NSW</option>
+						<option value="QLD">QLD</option>
+						<option value="SA">SA</option>
+						<option value="TAS">TAS</option>
+					</select>
+					<input type="text" name="phoneNumber"  placeholder="Phone number">
+					<input type="text" name="address" placeholder="Address details">
+					<input type="text" name="postcode" placeholder="Postcode">
+					<label class="fcolor">Choose the date</label>
+					<input type="date" data-clear-btn="true" name="date"  value="" >
+					<a id="confirmOrderButton" class="ui-btn ui-shadow ui-corner-all ui-btn-d">Confirm</a>
+					<button id="clearOrderButton" type="reset" class="ui-btn ui-shadow ui-corner-all">Clear</button>
+				</form>
+			</div>
+		</div>
+		
+		<div data-role="footer" data-theme="d" data-position="fixed" class="footer">
+			<p>Copyright © Gift Delivery 2024</p>
+		</div>
+	</div>
+     
+	<!------------------------Order Confirmation page---------------------------->
+	<div data-role="page" id="orderConfirmationPage">
+		<div data-role="header" data-theme="d" data-position="fixed">
+			<a href="javascript:history.go(-1)" class="ui-btn ui-btn-icon-left ui-icon-carat-l ui-btn-icon-notext ui-corner-all">go back</a>
+			<h1>Order Confirmation</h1>
+			<a href="#homePage" class="ui-btn ui-btn-icon-left ui-icon-home ui-btn-icon-notext ui-corner-all">home</a>
+		</div>
+  	<!------------------------Main content---------------------------->
+		<div data-role="content" id="content">
+			<div class="wrap">
+				<div id = orderInfo></div>
+				<div style="margin-top:25px">
+					<a href="#homePage" class="ui-btn ui-shadow ui-corner-all ui-btn-d">Done</a>
+				</div>
+			</div>
+		</div>
+		
+		<div data-role="footer" data-theme="d" data-position="fixed" class="footer">
+			<p>Copyright © Gift Delivery 2024</p>
+		</div>
+	</div>
+
+
+</body>
+
+</html>
